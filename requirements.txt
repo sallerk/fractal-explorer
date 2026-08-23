@@ -1,0 +1,9 @@
+numpy
+pillow
+matplotlib
+
+# Optional GPU acceleration (NVIDIA/CUDA only). The app runs fine on CPU
+# without these; if present it uses the GPU via a fused CUDA kernel.
+cupy-cuda12x
+nvidia-cuda-nvrtc-cu12
+nvidia-cuda-runtime-cu12
