@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  smoke-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install CPU dependencies
+        run: python -m pip install numpy pillow matplotlib
+
+      - name: Compile check
+        run: python -m py_compile fractal_explorer.py
+
+      - name: Smoke test fractal math (CPU path)
+        run: |
+          python -c "
+          import fractal_explorer as fe
+
+          s, e = fe.compute_escape(64, 64, complex(0, 0), 2.0, complex(-0.7, 0.27), 2, 50, 'julia')
+          assert s.shape == (64, 64) and e.shape == (64, 64)
+          rgb = fe.colorize(s, e, 'fire')
+          assert rgb.shape == (64, 64, 3)
+
+          ri, it, cv = fe.compute_newton(64, 64, complex(0, 0), 2.0, complex(1, 0), 3, 50)
+          assert ri.shape == (64, 64) and it.shape == (64, 64) and cv.shape == (64, 64)
+          rgb2 = fe.colorize_newton(ri, it, cv, 3, 50)
+          assert rgb2.shape == (64, 64, 3)
+
+          print('Smoke test OK, GPU_AVAILABLE =', fe.GPU_AVAILABLE)
+          "

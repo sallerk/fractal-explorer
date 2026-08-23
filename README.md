@@ -1,5 +1,7 @@
 # Fractal Explorer
 
+[![CI](https://github.com/sallerk/fractal-explorer/actions/workflows/ci.yml/badge.svg)](https://github.com/sallerk/fractal-explorer/actions/workflows/ci.yml)
+
 Real-time GUI fractal explorer (Julia, Mandelbrot, Burning Ship, Tricorn, Newton) with
 live color mapping, GPU acceleration (CUDA via CuPy), and image export.
 
