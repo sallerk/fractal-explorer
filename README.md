@@ -5,6 +5,8 @@
 Real-time GUI fractal explorer (Julia, Mandelbrot, Burning Ship, Tricorn, Newton) with
 live color mapping, GPU acceleration (CUDA via CuPy), and image export.
 
+![Base Julia set (c = -0.7 + 0.27i)](screenshot.png)
+
 ## Setup
 
 ```bash
